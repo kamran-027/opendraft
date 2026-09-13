@@ -4,8 +4,8 @@ PRESET_BRAINDUMPS = [
         "title": "Senior Product Manager",
         "target_role": "Senior Product Manager / Group PM",
         "category": "Non-Tech / Product",
-        "raw_text": """Kamran Verma
-kamran.verma@example.com | +91-9876543210 | Mumbai, India | linkedin.com/in/kamran-pm
+        "raw_text": """Alex Rivera
+alex.rivera@example.com | +1 (555) 019-XXXX | San Francisco, CA | linkedin.com/in/alex-rivera-pm
 
 Education:
 - MBA in Product Leadership, SPJIMR Mumbai (2019 - 2021), Top 5% Rank
@@ -35,7 +35,7 @@ Product Strategy, Go-to-Market (GTM), Wireframing (Figma), A/B Testing, Mixpanel
         "target_role": "Lead Growth Marketer / Head of Marketing",
         "category": "Marketing & Ops",
         "raw_text": """Priya Nambiar
-priya.nambiar@example.com | +91-9988776655 | Bengaluru, India | linkedin.com/in/priya-growth
+priya.nambiar@example.com | +91-98765-XXXXX | Bengaluru, India | linkedin.com/in/priya-growth
 
 Education:
 - BBA in Digital Marketing, Christ University (2018 - 2021), 8.8 GPA
@@ -59,7 +59,7 @@ Performance Marketing (Google Ads, Meta Ads Manager), SEO & SEM, HubSpot Automat
         "target_role": "Senior Data / Business Intelligence Analyst",
         "category": "Analytics & Finance",
         "raw_text": """Aarav Mehta
-aarav.mehta@example.com | +91-9123456780 | Pune, India | linkedin.com/in/aarav-data
+aarav.mehta@example.com | +91-91234-XXXXX | Pune, India | linkedin.com/in/aarav-data
 
 Education:
 - B.Sc in Statistics & Data Science, St. Xavier's College (2019 - 2022)
@@ -83,7 +83,7 @@ SQL (PostgreSQL, BigQuery), Python (Pandas, NumPy, Scikit-Learn), Tableau, Power
         "target_role": "Senior Full-Stack Engineer / Tech Lead",
         "category": "Engineering",
         "raw_text": """Rohan Sen
-rohan.sen@example.com | +91-9876501234 | Hyderabad, India | github.com/rohan-sen | linkedin.com/in/rohan-dev
+rohan.sen@example.com | +91-98765-XXXXX | Hyderabad, India | github.com/rohan-sen | linkedin.com/in/rohan-dev
 
 Education:
 - B.Tech in Computer Science, IIIT Hyderabad (2019 - 2023), 8.9 CGPA
