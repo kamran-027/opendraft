@@ -147,8 +147,7 @@ def render_jakes_resume_latex(data: ResumeData) -> str:
 
     # Complete LaTeX Document
     full_latex = rf"""%-------------------------
-% OpenDraft Resume Generator (Jake's Resume Architecture)
-% Generated with OpenDraft by Cadence Labs
+
 %------------------------
 
 \documentclass[letterpaper,11pt]{{article}}
