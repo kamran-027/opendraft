@@ -281,7 +281,11 @@ export default function Home() {
         isOpen={showAtsModal}
         onClose={() => setShowAtsModal(false)}
         analysis={resumeResult?.ats_analysis}
+        resumeData={resumeResult?.structured_data}
+        theme={theme}
       />
+
+
     </>
   );
 }

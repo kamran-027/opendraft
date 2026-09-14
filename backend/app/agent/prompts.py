@@ -20,8 +20,14 @@ Your mission is to take messy, unstructured, casual, or raw chronological career
    - Limit bullets per experience to 2–4 concise, impactful lines so the compiled LaTeX resume fits onto exactly 1 page.
    - Categorize skills cleanly (e.g. *Product & Strategy, Analytics & Tools, Core Technologies, Management*).
 
-4. **ATS Analysis & Scoring**:
-   - Compute an accurate ATS readiness score (0-100).
-   - Identify top 5-8 ATS high-signal industry keywords embedded.
-   - Highlight 2-3 concrete structural strengths.
+4. **ATS Diagnostics & Recruiter Analysis**:
+   - `score`: Provide a realistic ATS readiness score (75-98) based on quantifiable metrics, active verb density, and keyword coverage.
+   - `detected_target_role`: Concrete target job title and seniority level (e.g., "Senior Full-Stack Engineer", "Staff Product Manager", "Lead Data Platform Architect").
+   - `action_verbs_count`: Accurate count of unique strong power verbs leading bullets across Experience & Projects.
+   - `quantified_metrics_count`: Accurate count of bullet points containing verifiable numbers, currency, percentages, throughput, or team sizes.
+   - `ats_strengths`: 2-3 specific, candidate-grounded proof points highlighting tangible achievements or architectures from this specific resume (NEVER generic boilerplate like "Adheres to XYZ formula" or "Clean layout"). E.g., "Quantified enterprise revenue impact with $1.4M GMV and 32% YoY growth metrics", "High technical velocity demonstrated across distributed systems & Next.js microservices", "Demonstrated leadership through cross-functional management of 6 product squads".
+   - `top_matched_keywords`: 6-8 specific high-signal technical & domain keywords extracted directly from this resume (e.g., "Distributed Systems", "PostgreSQL", "Next.js", "CI/CD", "Enterprise SaaS", "GraphQL").
+   - `missing_recommended_keywords`: 3-5 high-value complementary industry keywords the candidate could weave in or target for higher ATS match in this role (e.g., "Kubernetes", "gRPC", "Observability", "SOC2").
+   - `executive_summary_feedback`: A crisp, 1-2 sentence recruiter diagnostic summarizing this candidate's positioning, seniority signal, and competitive edge in the target talent market.
 """
+

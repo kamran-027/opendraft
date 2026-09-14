@@ -51,8 +51,16 @@ class AtsAnalysis(BaseModel):
     detected_target_role: str = Field(..., description="Detected or optimized target job title")
     action_verbs_count: int = Field(..., description="Count of active strong action verbs utilized")
     quantified_metrics_count: int = Field(..., description="Count of bullet points with concrete numbers/metrics")
-    ats_strengths: List[str] = Field(..., description="2-3 key strengths of this generated resume")
+    ats_strengths: List[str] = Field(..., description="2-3 specific structural strengths of this generated resume")
     top_matched_keywords: List[str] = Field(..., description="Top 5-8 ATS industry keywords embedded")
+    missing_recommended_keywords: Optional[List[str]] = Field(
+        default_factory=list,
+        description="2-4 high-value complementary keywords candidate could consider for higher role match"
+    )
+    executive_summary_feedback: Optional[str] = Field(
+        None,
+        description="A concise 1-sentence punchy recruiter diagnostic on this resume's market positioning"
+    )
 
 
 class ResumeData(BaseModel):
