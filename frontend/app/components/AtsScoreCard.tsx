@@ -4,10 +4,10 @@ import React from "react";
 import { ShieldCheck, Zap, Award, Target, CheckCircle2, TrendingUp } from "lucide-react";
 
 interface AtsAnalysis {
-  score: int;
+  score: number;
   detected_target_role: string;
-  action_verbs_count: int;
-  quantified_metrics_count: int;
+  action_verbs_count: number;
+  quantified_metrics_count: number;
   ats_strengths: string[];
   top_matched_keywords: string[];
 }
