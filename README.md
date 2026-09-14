@@ -1,53 +1,113 @@
-# 📄 OpenDraft — Autonomous AI LaTeX Resume & CV Engine
+<p align="center">
+  <img src="frontend/public/favicon.svg" width="72" height="72" alt="OpenDraft Logo" />
+</p>
 
-> **Turn raw, unstructured thoughts into Ivy-League standard ATS LaTeX Resumes in seconds. Zero LaTeX knowledge required.**  
-> Built under **Cadence Labs** using **LangGraph**, **Google Gemini 3.6 Flash**, **FastAPI**, and **Next.js 15**. Inspired by the zero-friction philosophy of `ihatepdf.cv`.
+<h1 align="center">OpenDraft</h1>
 
----
+<p align="center">
+  <strong>Autonomous AI LaTeX Resume & CV Engine</strong><br />
+  Turn messy, unformatted career notes into publication-grade, 1-page Jake's LaTeX resumes in seconds. Zero LaTeX knowledge required.
+</p>
 
-## 🌟 Overview
-
-**OpenDraft** is a privacy-first, zero-friction AI platform that enables non-technical professionals (Product Managers, Marketers, Data Analysts, Engineers) to generate **flawless 1-page LaTeX resumes** (Jake's Resume / Ivy League standard) simply by typing or pasting casual notes.
-
-### 🎯 Key Highlights:
-* **🧠 Google XYZ Impact Formatter**: Converts passive bullet points into quantified achievements (*"Accomplished [X], measured by [Y], by doing [Z]"*).
-* **📐 Strict 1-Page Vertical Budget**: Guarantees optimal vertical spacing and typography without overflowing onto page 2.
-* **🛡️ Special Character Sanitization**: Automatically escapes tricky LaTeX characters (`&`, `%`, `$`, `#`, `_`, `{`, `}`) to eliminate compilation errors.
-* **🚀 1-Click Export Suite**:
-  * 📥 **Download PDF** (clean, zero watermarks)
-  * 📋 **Copy `.tex` Source Code**
-  * 🌐 **Open Directly in Overleaf** with 1 click
-* **⚡ 1-Click Role Presets**: Includes instant starter presets for *Product Manager*, *Growth Marketer*, *Data Analyst*, and *Software Engineer*.
+<p align="center">
+  <a href="https://github.com/kamran-027/opendraft"><img src="https://img.shields.io/badge/Open%20Source-100%25-blue?style=flat-square" alt="Open Source" /></a>
+  <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js" alt="Next.js 15" /></a>
+  <a href="https://fastapi.tiangolo.com"><img src="https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat-square&logo=fastapi" alt="FastAPI" /></a>
+  <a href="https://aistudio.google.com"><img src="https://img.shields.io/badge/Engine-Google%20Gemini-8E75B2?style=flat-square&logo=google" alt="Gemini" /></a>
+  <a href="https://github.com/kamran-027/opendraft/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" /></a>
+</p>
 
 ---
 
-## 🏗️ Tech Stack
+## 🌟 What is OpenDraft?
 
-| Layer | Technology |
-|---|---|
-| **AI / LLM Engine** | [Google Gemini 3.6 Flash](https://aistudio.google.com/) via LangChain |
-| **Agentic Framework** | LangGraph & Pydantic Structured Output |
-| **LaTeX Architecture** | Jake's Resume LaTeX Template Engine |
-| **Backend API** | FastAPI, Uvicorn, Python 3.9+ |
-| **Frontend UI** | Next.js 15 (App Router), React 19, Tailwind CSS |
-| **Icons & Design** | Lucide React, Glassmorphism, Print-to-PDF CSS |
+**Jake's Resume** and Ivy-League LaTeX templates are universally recognized as the gold standard by top tech recruiters and Applicant Tracking Systems (ATS) for their clean, high-density 1-page layout. 
+
+However, **95% of job seekers do not know LaTeX**—wrestling with macro syntax, overfull `\hbox` errors, and broken environments just to update a bullet point is painful.
+
+**OpenDraft** eliminates that barrier. Paste your raw, unstructured career notes, job descriptions, or career chronology, and OpenDraft autonomously compiles a publication-ready, 1-page LaTeX resume with calibrated ATS keyword optimization.
 
 ---
 
-## 🚀 Quickstart Guide
+## ✨ Key Features
 
-### 1️⃣ Run Backend (FastAPI)
+### 🎯 Non-Technical & Career Focus
+* **Google XYZ Formula Rewiring**: Automatically rewrites passive bullet points into executive-level achievements:  
+  $$\text{Accomplished } [X], \text{ as measured by } [Y], \text{ by doing } [Z]$$
+* **Target Role Keyword Personalization**: Tailors action verbs and industry keywords to the exact job title you are applying for.
+* **Interactive ATS Readiness Report**: On-demand diagnostics modal displaying your estimated ATS compatibility score (0–100), active verb counts, quantified metric density, and matched industry keywords.
+* **Authentic 1-Page Letter Layout**: Enforces a strict vertical budget to ensure your resume fits comfortably on 1 standard Letter sheet without overflowing to page 2.
+* **Light & Dark Mode**: Modern, distraction-free interface with instant theme switching.
+
+### 🛠️ Technical & Compiler Innovations
+* **Deterministic LaTeX Compiler**: Rather than prompting LLMs to write raw, hallucination-prone `.tex` code, OpenDraft uses a hybrid pipeline—extracting structured JSON via Pydantic and compiling it through a deterministic Python typesetter.
+* **ATS Ligature Defense (`glyphtounicode`)**: Injects `\input{glyphtounicode}` and `\pdfgentounicode=1` into the LaTeX preamble, preventing ATS parsers from misreading typographic ligatures (`fi`, `fl`) as broken words (`workow` instead of `workflow`).
+* **1-Click Export Suite**:
+  * 📥 **Clean 1-Page PDF Download**: Uses an isolated print engine that strips browser chrome, headers, and footers.
+  * 🌐 **Instant Overleaf Sync**: Submits the `.tex` payload directly to Overleaf via HTTP POST with zero URL length constraints.
+  * 📋 **Copy `.tex` Source Code**: Copy raw LaTeX markup with syntax highlighting in one click.
+
+---
+
+## 🏗️ Architecture & Technology Stack
+
+```
+[Raw Career Notes + Target Role]
+             │
+             ▼
+[Next.js 15 Frontend Studio] ──(POST /api/generate)──► [FastAPI Backend]
+                                                              │
+                                                              ▼
+                                                 [LangChain + Gemini Flash]
+                                                              │
+                     ┌────────────────────────────────────────┴────────────────────────────────────────┐
+                     ▼                                                                                 ▼
+      [Pydantic Structured Validation]                                                  [Google XYZ Bullet Engine]
+                     │                                                                                 │
+                     ▼                                                                                 ▼
+     [Jake's LaTeX Engine (templates.py)]                                              [ATS Diagnostics & Keyword Engine]
+                     │                                                                                 │
+                     └────────────────────────────────────────┬────────────────────────────────────────┘
+                                                              │
+                                                    [JSON Response Payload]
+                                                              │
+             ┌────────────────────────────────────────────────┼────────────────────────────────────────────────┐
+             ▼                                                ▼                                                ▼
+ [Interactive Document Preview]                     [Dedicated Print Engine]                      [1-Click Overleaf Sync]
+```
+
+* **Frontend**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, Lucide React.
+* **Backend**: FastAPI, Uvicorn, Python 3.11+, Pydantic v2.
+* **AI & Orchestration**: LangChain, Google Gemini Flash (`with_structured_output`).
+* **Typesetting Standard**: Canonical Jake's Resume LaTeX Architecture.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* **Node.js** 18+ and **npm** / **pnpm**
+* **Python** 3.10+
+* A [Google Gemini API Key](https://aistudio.google.com/)
+
+---
+
+### 1️⃣ Backend Setup (FastAPI)
+
 ```bash
 cd backend
 
 # Create & activate virtual environment
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Start the server
+# Configure environment variables
+cp .env.example .env        # Add your GEMINI_API_KEY to backend/.env
+
+# Start FastAPI backend
 uvicorn app.main:app --reload --port 8000
 ```
 > 📍 Backend runs at: `http://127.0.0.1:8000`  
@@ -55,20 +115,27 @@ uvicorn app.main:app --reload --port 8000
 
 ---
 
-### 2️⃣ Run Frontend (Next.js)
+### 2️⃣ Frontend Setup (Next.js)
+
 ```bash
-cd ../frontend
+cd frontend
 
 # Install dependencies
 npm install
 
-# Start Next.js development server
+# Start development server
 npm run dev
 ```
-> 📍 Frontend runs at: `http://localhost:3002` (or `http://localhost:3000`)
+> 📍 OpenDraft Studio opens at: `http://localhost:3002`
 
 ---
 
-## 👨‍💻 Author & Agency
+## 📄 License
 
-Built by **[Kamran Khan](https://github.com/kamran-027)** under **Cadence Labs** — Elite AI Agents & High-Impact MVPs.
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 Author
+
+Built by **[Kamran Khan](https://github.com/kamran-027)**
