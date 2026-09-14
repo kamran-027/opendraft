@@ -7,6 +7,11 @@
   --foreground: #0f172a;
 }
 
+.dark {
+  --background: #090d16;
+  --foreground: #f8fafc;
+}
+
 html, body {
   color: var(--foreground);
   background: var(--background);
@@ -14,7 +19,66 @@ html, body {
   overflow-x: hidden !important;
 }
 
-/* Hide horizontal and custom scrollbars where needed */
+/* Explicit theme enforcement (ensures immediate switching even if PostCSS cached media queries) */
+html.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+/* Force light mode when .dark class is NOT present */
+html:not(.dark) body {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) .dark\:bg-slate-950,
+html:not(.dark) [class*="dark:bg-slate-950"] {
+  background-color: rgba(241, 245, 249, 0.7) !important;
+}
+
+html:not(.dark) header[class*="dark:bg-slate-950"],
+html:not(.dark) footer[class*="dark:bg-slate-950"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html:not(.dark) [class*="dark:bg-slate-900"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html:not(.dark) [class*="dark:bg-indigo-950"] {
+  background-color: rgb(241 245 249 / 0.9) !important;
+  color: #1e293b !important;
+  border-color: rgb(226 232 240 / 0.9) !important;
+}
+
+html:not(.dark) [class*="dark:bg-slate-800"] {
+  background-color: #ffffff !important;
+}
+
+html:not(.dark) [class*="dark:text-white"],
+html:not(.dark) [class*="dark:text-slate-100"] {
+  color: #0f172a !important;
+}
+
+html:not(.dark) [class*="dark:text-slate-200"],
+html:not(.dark) [class*="dark:text-slate-300"] {
+  color: #334155 !important;
+}
+
+html:not(.dark) [class*="dark:text-slate-400"],
+html:not(.dark) [class*="dark:text-slate-500"] {
+  color: #64748b !important;
+}
+
+html:not(.dark) [class*="dark:border-slate-800"],
+html:not(.dark) [class*="dark:border-slate-700"] {
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+/* Hide horizontal scrollbars */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -39,24 +103,66 @@ html, body {
   background: #94a3b8;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
 .bg-dot-pattern {
   background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
+.dark .bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.print-only {
+  display: none;
+}
+
 /* Print CSS for true 1-page PDF export */
 @media print {
-  body {
+  @page {
+    size: letter portrait;
+    margin: 0.4in;
+  }
+  
+  html, body {
     background: white !important;
     color: black !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
   .no-print {
     display: none !important;
   }
+
   .print-only {
     display: block !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    background: white !important;
+  }
+
+  #printable-resume,
+  #printable-resume-page {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    width: 100% !important;
+    background: white !important;
+    color: black !important;
   }
 }

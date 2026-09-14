@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="od-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="od-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5b4fc" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Shield / Canvas -->
+  <rect width="48" height="48" rx="12" fill="url(#od-gradient)" />
+  
+  <!-- Architectural Document Sheet -->
+  <path d="M12 11C12 9.89543 12.8954 9 14 9H27L36 18V37C36 38.1046 35.1046 39 34 39H14C12.8954 39 12 38.1046 12 37V11Z" fill="white" fill-opacity="0.16" stroke="white" stroke-width="1.8" stroke-linejoin="round" />
+  
+  <!-- Folded Corner -->
+  <path d="M26.5 9.5V17.5C26.5 18.0523 26.9477 18.5 27.5 18.5H35.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Drafting / Compass Vector Compass Nib -->
+  <path d="M17 25H31" stroke="url(#od-accent)" stroke-width="2" stroke-linecap="round" />
+  <path d="M17 30H27" stroke="url(#od-accent)" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Sparkle Vertex -->
+  <circle cx="31" cy="30" r="1.5" fill="white" />
+</svg>
