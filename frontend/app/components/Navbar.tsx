@@ -74,10 +74,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               <button
                 onClick={onOpenOverleaf}
-                className="hidden md:inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+                className="hidden md:inline-flex items-center gap-1.5 bg-[#136338] hover:bg-[#0e4d2b] text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer active:scale-95"
                 title="Open directly in Overleaf"
               >
-                <ExternalLink className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <ExternalLink className="w-4 h-4 text-emerald-200" />
                 <span>Overleaf</span>
               </button>
 

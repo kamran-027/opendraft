@@ -111,10 +111,20 @@ export default function Home() {
 
   const handleOpenOverleaf = () => {
     if (!resumeResult?.latex_code) return;
-    const overleafUrl = `https://www.overleaf.com/docs?snip_uri=data:application/x-tex;base64,${btoa(
-      unescape(encodeURIComponent(resumeResult.latex_code))
-    )}`;
-    window.open(overleafUrl, "_blank");
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://www.overleaf.com/docs";
+    form.target = "_blank";
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "snip";
+    input.value = resumeResult.latex_code;
+
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
   };
 
   return (
