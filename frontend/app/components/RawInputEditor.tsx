@@ -137,17 +137,17 @@ Experience:
         <button
           onClick={onGenerate}
           disabled={loading || !rawText.trim()}
-          className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 dark:from-indigo-600 dark:via-indigo-700 dark:to-violet-700 hover:from-slate-800 hover:to-indigo-900 dark:hover:from-indigo-500 dark:hover:to-violet-600 text-white px-5 py-2.5 rounded-xl text-xs font-semibold shadow-md shadow-slate-900/10 dark:shadow-indigo-600/20 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all"
+          className="group inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-slate-100 dark:text-slate-900 border border-slate-900 dark:border-white/10 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold tracking-tight shadow-xs hover:shadow-sm active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all duration-150"
         >
           {loading ? (
             <>
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-indigo-400" />
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-400 dark:text-slate-500" />
               <span>Compiling...</span>
             </>
           ) : (
             <>
               <span>Compile into LaTeX</span>
-              <ArrowRight className="w-3.5 h-3.5 text-indigo-300" />
+              <ArrowRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 group-hover:text-white dark:group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all duration-150" />
             </>
           )}
         </button>
