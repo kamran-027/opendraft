@@ -271,10 +271,10 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
   // --- SCREEN PREVIEW MODE ---
   return (
     <div className="h-full overflow-y-auto bg-slate-200/80 dark:bg-slate-950/80 p-3 sm:p-5 flex justify-center items-start selection:bg-indigo-100 transition-colors">
-      {/* The 1-Page Letter Sheet (Authentic Jake's Resume Spacing) */}
+      {/* The 1-Page Letter Sheet (Authentic Jake's Resume Spacing & Letter Proportion) */}
       <div
         id="printable-resume"
-        className="bg-white text-slate-900 shadow-xl rounded-sm w-full max-w-[720px] p-6 sm:p-8 font-serif leading-normal selection:bg-indigo-100 shrink-0 my-1 sm:my-2"
+        className="bg-white text-slate-900 shadow-2xl rounded-xs w-full max-w-[720px] min-h-[960px] p-7 sm:p-9 font-serif leading-normal selection:bg-indigo-100 shrink-0 my-2 sm:my-4"
         style={{ fontFamily: '"Times New Roman", Times, Georgia, serif' }}
       >
         {/* Header */}

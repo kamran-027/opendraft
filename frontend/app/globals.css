@@ -146,6 +146,26 @@ html:not(.dark) [class*="dark:border-slate-700"] {
     display: none !important;
   }
 
+  /* Suppress all Next.js dev tools, Fast Refresh badges, Vite indicators, and portal dialogs */
+  nextjs-portal,
+  [data-nextjs-toast],
+  [data-nextjs-dialog],
+  [data-nextjs-dialog-overlay],
+  [data-nextjs-portal],
+  #__next-build-watcher,
+  div[class*="nextjs"],
+  div[class*="turbopack"],
+  button[aria-label*="Next.js"],
+  button[aria-label*="Fast Refresh"],
+  button[aria-label*="Turbopack"],
+  div[style*="z-index: 9999"],
+  div[style*="z-index: 2147483647"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
   .print-only {
     display: block !important;
     width: 100% !important;

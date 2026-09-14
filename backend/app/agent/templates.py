@@ -47,14 +47,24 @@ def render_jakes_resume_latex(data: ResumeData) -> str:
     if email:
         contact_parts.append(rf"\href{{mailto:{email}}}{{\underline{{{email}}}}}")
     if linkedin:
-        clean_li = linkedin.replace("https://", "").replace("http://", "").replace("www.linkedin.com/in/", "").strip("/")
-        contact_parts.append(rf"\href{{{linkedin}}}{{\underline{{linkedin.com/in/{clean_li}}}}}")
+        clean_li = re.sub(r"^https?://(www\.)?linkedin\.com/in/", "", linkedin).strip("/")
+        clean_li = re.sub(r"^linkedin\.com/in/", "", clean_li).strip("/")
+        clean_li_escaped = escape_latex(clean_li)
+        full_li_url = f"https://linkedin.com/in/{clean_li}" if not linkedin.startswith("http") else linkedin
+        contact_parts.append(rf"\href{{{full_li_url}}}{{\underline{{linkedin.com/in/{clean_li_escaped}}}}}")
     if github:
-        clean_gh = github.replace("https://", "").replace("http://", "").replace("www.github.com/", "").strip("/")
-        contact_parts.append(rf"\href{{{github}}}{{\underline{{github.com/{clean_gh}}}}}")
+        clean_gh = re.sub(r"^https?://(www\.)?github\.com/", "", github).strip("/")
+        clean_gh = re.sub(r"^github\.com/", "", clean_gh).strip("/")
+        clean_gh_escaped = escape_latex(clean_gh)
+        full_gh_url = f"https://github.com/{clean_gh}" if not github.startswith("http") else github
+        contact_parts.append(rf"\href{{{full_gh_url}}}{{\underline{{github.com/{clean_gh_escaped}}}}}")
     if website:
-        clean_web = website.replace("https://", "").replace("http://", "").strip("/")
-        contact_parts.append(rf"\href{{{website}}}{{\underline{{{clean_web}}}}}")
+        clean_web = re.sub(r"^https?://(www\.)?", "", website).strip("/")
+        clean_web_escaped = escape_latex(clean_web)
+        full_web_url = f"https://{clean_web}" if not website.startswith("http") else website
+        contact_parts.append(rf"\href{{{full_web_url}}}{{\underline{{{clean_web_escaped}}}}}")
+    if location:
+        contact_parts.append(location)
 
     contact_line = " $|$ ".join(contact_parts)
 
