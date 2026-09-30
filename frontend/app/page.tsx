@@ -7,7 +7,7 @@ import { PdfDocumentPreview } from "./components/PdfDocumentPreview";
 import { LatexSourceView } from "./components/LatexSourceView";
 import { AtsReportModal } from "./components/AtsReportModal";
 import { PRESET_BRAINDUMPS } from "./data/presets";
-import { FileText, Code2, Sparkles, Check, Download, ExternalLink, Zap, AlertCircle, Github, ShieldCheck, Wand2 } from "lucide-react";
+import { FileText, Code2, Sparkles, Check, Download, ExternalLink, Zap, AlertCircle, Github, ShieldCheck, Wand2, Copy } from "lucide-react";
 import { API_URL } from "./config";
 
 export default function Home() {
@@ -136,7 +136,7 @@ export default function Home() {
         {/* Background Ambience Pattern */}
         <div className="fixed inset-0 bg-dot-pattern pointer-events-none -z-10" />
 
-        {/* Header (56px) */}
+        {/* Header */}
         <Navbar
           hasGeneratedResume={!!resumeResult}
           onDownloadPdf={handleDownloadPdf}
@@ -147,8 +147,42 @@ export default function Home() {
           onToggleTheme={toggleTheme}
         />
 
+        {/* Mobile View Switcher - Seamlessly Pinned Under Navbar */}
+        <div className="lg:hidden shrink-0 border-b border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md px-3 py-1.5 z-30">
+          <div className="grid grid-cols-2 p-0.5 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs font-medium border border-slate-200/60 dark:border-slate-800">
+            <button
+              onClick={() => setMobileTab("editor")}
+              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                mobileTab === "editor"
+                  ? "bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-xs font-semibold"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <Wand2 className="w-3.5 h-3.5 text-indigo-500" />
+              <span>1. Career Notes</span>
+            </button>
+
+            <button
+              onClick={() => setMobileTab("preview")}
+              className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                mobileTab === "preview"
+                  ? "bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-xs font-semibold"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-500" />
+              <span>2. Resume Preview</span>
+              {resumeResult?.ats_analysis && (
+                <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 font-mono">
+                  {resumeResult.ats_analysis.score}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
         {/* Main Split Studio Container */}
-        <main className="max-w-[1600px] w-full mx-auto px-2.5 sm:px-5 lg:px-6 py-2 sm:py-3 flex-1 min-h-0 flex flex-col overflow-hidden">
+        <main className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 lg:px-6 py-2 lg:py-3 flex-1 min-h-0 flex flex-col overflow-hidden">
           {/* Error Alert */}
           {errorMessage && (
             <div className="mb-2 sm:mb-3 p-2.5 sm:p-3 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 rounded-xl flex items-center gap-2.5 text-xs text-rose-800 dark:text-rose-300 animate-in fade-in duration-150 shrink-0">
@@ -156,40 +190,6 @@ export default function Home() {
               <p>{errorMessage}</p>
             </div>
           )}
-
-          {/* Mobile Segmented View Control (Visible only on screens < lg) */}
-          <div className="lg:hidden shrink-0 mb-2 sm:mb-2.5">
-            <div className="grid grid-cols-2 p-1 bg-slate-200/80 dark:bg-slate-800/90 rounded-xl text-xs font-semibold">
-              <button
-                onClick={() => setMobileTab("editor")}
-                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                  mobileTab === "editor"
-                    ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <Wand2 className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Notes & Inputs</span>
-              </button>
-
-              <button
-                onClick={() => setMobileTab("preview")}
-                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
-                  mobileTab === "preview"
-                    ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Resume Preview</span>
-                {resumeResult?.ats_analysis && (
-                  <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 font-mono">
-                    {resumeResult.ats_analysis.score}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
 
           {/* Studio Grid: Tab-switched on mobile, Split 50/50 on lg+ */}
           <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-12 lg:gap-4 overflow-hidden">
@@ -220,7 +220,7 @@ export default function Home() {
                   <div className="flex items-center gap-1 bg-slate-200/80 dark:bg-slate-800 p-0.5 rounded-lg shrink-0">
                     <button
                       onClick={() => setActiveTab("preview")}
-                      className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                         activeTab === "preview"
                           ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs font-bold"
                           : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
@@ -232,7 +232,7 @@ export default function Home() {
 
                     <button
                       onClick={() => setActiveTab("latex")}
-                      className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                         activeTab === "latex"
                           ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs font-bold"
                           : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
@@ -276,13 +276,44 @@ export default function Home() {
                     />
                   )}
                 </div>
+
+                {/* Mobile Quick Action Footer for Preview Tab */}
+                {resumeResult && (
+                  <div className="lg:hidden p-2.5 bg-white/95 dark:bg-slate-900/95 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 shrink-0">
+                    <button
+                      onClick={() => setMobileTab("editor")}
+                      className="flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 transition-colors"
+                    >
+                      <Wand2 className="w-3.5 h-3.5 text-indigo-500" />
+                      <span>Edit Notes</span>
+                    </button>
+
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={handleCopyLatex}
+                        className="p-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                        title="Copy .tex"
+                      >
+                        {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
+                      </button>
+
+                      <button
+                        onClick={handleDownloadPdf}
+                        className="inline-flex items-center gap-1.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-xs active:scale-95 transition-all"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Download PDF</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </main>
 
-        {/* Clean Formatted Footer without Love Emoji, Linking to GitHub */}
-        <footer className="h-9 sm:h-10 border-t border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 shrink-0 transition-colors pb-safe">
+        {/* Clean Formatted Footer - Desktop Only to give maximum space to mobile */}
+        <footer className="hidden lg:flex h-9 border-t border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-6 items-center justify-between text-xs text-slate-500 dark:text-slate-400 shrink-0 transition-colors">
           <div className="flex items-center gap-1.5">
             <span>Built by</span>
             <a
@@ -296,7 +327,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="hidden sm:flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-medium">
+          <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-medium">
             <span>Ivy League / Jake's Resume Standard</span>
             <span>•</span>
             <span>Zero LaTeX Syntax Required</span>
