@@ -184,7 +184,7 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-150 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 animate-in fade-in duration-150 ${
         isDark ? "dark" : ""
       }`}
       data-theme={isDark ? "dark" : "light"}
@@ -197,7 +197,7 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full max-w-3xl rounded-2xl shadow-2xl border overflow-hidden z-10 flex flex-col max-h-[90vh] transition-colors ${
+        className={`relative w-full max-w-3xl rounded-2xl shadow-2xl border overflow-hidden z-10 flex flex-col max-h-[92dvh] sm:max-h-[90vh] transition-colors ${
           isDark
             ? "bg-slate-900 border-slate-800 text-slate-100"
             : "bg-white border-slate-200 text-slate-900"
@@ -205,27 +205,27 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
       >
         {/* Top Control Bar */}
         <div
-          className={`px-6 py-4 border-b flex items-center justify-between transition-colors ${
+          className={`px-4 sm:px-6 py-3 sm:py-4 border-b flex items-center justify-between transition-colors ${
             isDark
               ? "bg-slate-900/90 border-slate-800"
               : "bg-slate-50/70 border-slate-100"
           }`}
         >
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-              <ShieldCheck className="w-4 h-4" />
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <h3 className="text-xs sm:text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-100">
                   ATS Audit & Keyword Diagnostics
                 </h3>
-                <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                  v2.4 Engine
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase px-1.5 py-0.2 sm:py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                  v2.4
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Calibrated for Greenhouse, Lever, Workday, and Taleo parsing algorithms
+              <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">
+                Calibrated for Greenhouse, Lever, Workday, and Taleo algorithms
               </p>
             </div>
           </div>
@@ -246,46 +246,46 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
 
         {/* Primary Benchmark Bar */}
         <div
-          className={`px-6 py-4 border-b transition-colors ${
+          className={`px-4 sm:px-6 py-3.5 sm:py-4 border-b transition-colors ${
             isDark
               ? "bg-slate-900/60 border-slate-800"
               : "bg-slate-50/50 border-slate-100"
           }`}
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-slate-900 dark:bg-slate-950 border border-slate-800 dark:border-slate-700 text-white flex flex-col items-center justify-center shadow-sm">
-                  <span className="text-xl font-bold tracking-tight text-emerald-400 font-mono">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="relative shrink-0">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-900 dark:bg-slate-950 border border-slate-800 dark:border-slate-700 text-white flex flex-col items-center justify-center shadow-sm">
+                  <span className="text-lg sm:text-xl font-bold tracking-tight text-emerald-400 font-mono">
                     {analysis.score}
                   </span>
-                  <span className="text-[9px] text-slate-400 font-medium uppercase tracking-wider -mt-0.5">
+                  <span className="text-[8px] sm:text-[9px] text-slate-400 font-medium uppercase tracking-wider -mt-0.5">
                     / 100
                   </span>
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
-                    BENCHMARK VERDICT:
+                  <span className="text-[10px] sm:text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
+                    VERDICT:
                   </span>
                   <span
-                    className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border ${scoreTier.bg} ${scoreTier.color}`}
+                    className={`text-[10px] sm:text-[11px] font-semibold px-2 py-0.5 rounded-md border ${scoreTier.bg} ${scoreTier.color}`}
                   >
                     {scoreTier.label}
                   </span>
                 </div>
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                <h4 className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
                   {analysis.detected_target_role}
                 </h4>
               </div>
             </div>
 
             {/* Quick Metrics Badges */}
-            <div className="flex items-center gap-2 w-full sm:w-auto">
-              <div className="flex-1 sm:flex-initial flex items-center justify-between sm:justify-start gap-2 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs">
+            <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center">
+              <div className="flex items-center justify-between sm:justify-start gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs">
                 <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-                  <Zap className="w-3.5 h-3.5 text-amber-500" />
+                  <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                   <span className="text-[11px] font-medium">Active Verbs</span>
                 </div>
                 <span className="font-mono font-bold text-slate-900 dark:text-slate-100">
@@ -293,10 +293,10 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
                 </span>
               </div>
 
-              <div className="flex-1 sm:flex-initial flex items-center justify-between sm:justify-start gap-2 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs">
+              <div className="flex items-center justify-between sm:justify-start gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs">
                 <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-                  <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-                  <span className="text-[11px] font-medium">Metrics Proven</span>
+                  <TrendingUp className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                  <span className="text-[11px] font-medium">Metrics</span>
                 </div>
                 <span className="font-mono font-bold text-slate-900 dark:text-slate-100">
                   {analysis.quantified_metrics_count}
@@ -306,18 +306,18 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
           </div>
 
           {/* Recruiter Positioning Diagnostic Callout */}
-          <div className="mt-3.5 p-2.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
-            <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-            <p className="leading-relaxed">
+          <div className="mt-3 p-2.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <p className="leading-relaxed text-[11px] sm:text-xs">
               {analysis.executive_summary_feedback ||
                 `Resume demonstrates elite executive-level positioning for ${analysis.detected_target_role} with strong proof-driven bullet structures and strict zero-fluff ATS formatting.`}
             </p>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs (Scrollable on mobile) */}
         <div
-          className={`flex border-b px-6 text-xs transition-colors ${
+          className={`flex border-b px-3 sm:px-6 text-xs overflow-x-auto whitespace-nowrap no-scrollbar touch-scroll transition-colors ${
             isDark
               ? "bg-slate-900/40 border-slate-800"
               : "bg-slate-50/40 border-slate-100"
@@ -325,55 +325,55 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
         >
           <button
             onClick={() => setActiveTab("overview")}
-            className={`flex items-center gap-2 py-2.5 px-3 border-b-2 font-medium transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 border-b-2 font-medium transition-colors cursor-pointer shrink-0 ${
               activeTab === "overview"
                 ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
             }`}
           >
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>4-Pillar Scorecard</span>
+            <BarChart3 className="w-3.5 h-3.5 shrink-0" />
+            <span><span className="hidden xs:inline">4-Pillar </span>Scorecard</span>
           </button>
 
           <button
             onClick={() => setActiveTab("proof")}
-            className={`flex items-center gap-2 py-2.5 px-3 border-b-2 font-medium transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 border-b-2 font-medium transition-colors cursor-pointer shrink-0 ${
               activeTab === "proof"
                 ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
             }`}
           >
-            <Zap className="w-3.5 h-3.5" />
-            <span>Extracted Proof ({extractedVerbs.length} Verbs, {extractedMetrics.length} Metrics)</span>
+            <Zap className="w-3.5 h-3.5 shrink-0" />
+            <span>Extracted Proof ({extractedVerbs.length}V, {extractedMetrics.length}M)</span>
           </button>
 
           <button
             onClick={() => setActiveTab("keywords")}
-            className={`flex items-center gap-2 py-2.5 px-3 border-b-2 font-medium transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 border-b-2 font-medium transition-colors cursor-pointer shrink-0 ${
               activeTab === "keywords"
                 ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
             }`}
           >
-            <Target className="w-3.5 h-3.5" />
+            <Target className="w-3.5 h-3.5 shrink-0" />
             <span>Keyword Matrix</span>
           </button>
 
           <button
             onClick={() => setActiveTab("checklist")}
-            className={`flex items-center gap-2 py-2.5 px-3 border-b-2 font-medium transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 border-b-2 font-medium transition-colors cursor-pointer shrink-0 ${
               activeTab === "checklist"
                 ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200"
             }`}
           >
-            <FileText className="w-3.5 h-3.5" />
-            <span>ATS Rules Checklist</span>
+            <FileText className="w-3.5 h-3.5 shrink-0" />
+            <span>ATS Checklist</span>
           </button>
         </div>
 
         {/* Tab Body */}
-        <div className="p-6 overflow-y-auto flex-1 space-y-6">
+        <div className="p-4 sm:p-6 overflow-y-auto touch-scroll flex-1 space-y-4 sm:space-y-6">
           {/* TAB 1: 4-PILLAR SCORECARD */}
           {activeTab === "overview" && (
             <div className="space-y-5">
@@ -606,7 +606,7 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
           {activeTab === "keywords" && (
             <div className="space-y-6">
               {/* Top Controls */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 <div>
                   <h4 className={`text-xs font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     Target Role Keyword Alignment
@@ -617,7 +617,7 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
                 </div>
                 <button
                   onClick={handleCopyAllKeywords}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer ${
+                  className={`self-start sm:self-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors cursor-pointer shrink-0 ${
                     isDark
                       ? "bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200"
                       : "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800"
@@ -758,19 +758,19 @@ export const AtsReportModal: React.FC<AtsReportModalProps> = ({
 
         {/* Modal Footer */}
         <div
-          className={`px-6 py-3.5 border-t flex items-center justify-between transition-colors ${
+          className={`px-4 sm:px-6 py-3 border-t flex items-center justify-between transition-colors ${
             isDark
               ? "bg-slate-900/80 border-slate-800"
               : "bg-slate-50/70 border-slate-100"
           }`}
         >
-          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-            <span>OpenDraft Autonomous Resume Architecture</span>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 truncate mr-2">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+            <span className="truncate">OpenDraft ATS Engine</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-white transition-colors cursor-pointer"
+            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-semibold bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-white transition-colors cursor-pointer shrink-0"
           >
             Close Audit
           </button>

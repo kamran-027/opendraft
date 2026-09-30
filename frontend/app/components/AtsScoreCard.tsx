@@ -20,33 +20,33 @@ export const AtsScoreCard: React.FC<AtsScoreCardProps> = ({ analysis }) => {
   if (!analysis) return null;
 
   return (
-    <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_rgba(0,0,0,0.02)] animate-in fade-in slide-in-from-bottom-2 duration-300">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+    <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-3xl p-4 sm:p-5 shadow-[0_4px_25px_rgba(0,0,0,0.02)] animate-in fade-in slide-in-from-bottom-2 duration-300">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-emerald-500/20">
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold text-base sm:text-lg shadow-md shadow-emerald-500/20 shrink-0">
             {analysis.score}
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
-              <h4 className="text-sm font-bold text-slate-900">ATS Readiness Score: {analysis.score}/100</h4>
-              <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">ATS Readiness: {analysis.score}/100</h4>
+              <span className="text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
                 High Impact
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Targeted Role: <strong className="text-slate-800">{analysis.detected_target_role}</strong>
+            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Role: <strong className="text-slate-800 dark:text-slate-200">{analysis.detected_target_role}</strong>
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
-          <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200/60">
-            <Zap className="w-3.5 h-3.5 text-amber-500" />
-            <span>{analysis.action_verbs_count} Active Verbs</span>
+        <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-3 text-xs font-medium text-slate-600 dark:text-slate-300">
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200/60 dark:border-slate-700">
+            <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+            <span className="text-[11px]">{analysis.action_verbs_count} Verbs</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200/60">
-            <TrendingUp className="w-3.5 h-3.5 text-indigo-500" />
-            <span>{analysis.quantified_metrics_count} Quantified Bullets</span>
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-200/60 dark:border-slate-700">
+            <TrendingUp className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+            <span className="text-[11px]">{analysis.quantified_metrics_count} Metrics</span>
           </div>
         </div>
       </div>

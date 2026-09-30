@@ -7,7 +7,7 @@ import { PdfDocumentPreview } from "./components/PdfDocumentPreview";
 import { LatexSourceView } from "./components/LatexSourceView";
 import { AtsReportModal } from "./components/AtsReportModal";
 import { PRESET_BRAINDUMPS } from "./data/presets";
-import { FileText, Code2, Sparkles, Check, Download, ExternalLink, Zap, AlertCircle, Github, ShieldCheck } from "lucide-react";
+import { FileText, Code2, Sparkles, Check, Download, ExternalLink, Zap, AlertCircle, Github, ShieldCheck, Wand2 } from "lucide-react";
 import { API_URL } from "./config";
 
 export default function Home() {
@@ -15,6 +15,7 @@ export default function Home() {
   const [targetRole, setTargetRole] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"preview" | "latex">("preview");
+  const [mobileTab, setMobileTab] = useState<"editor" | "preview">("editor");
   const [resumeResult, setResumeResult] = useState<any | null>(null);
   const [isCopied, setIsCopied] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -91,6 +92,7 @@ export default function Home() {
       const data = await res.json();
       setResumeResult(data);
       setActiveTab("preview");
+      setMobileTab("preview");
     } catch (err: any) {
       setErrorMessage(err.message || "Could not reach backend API.");
     } finally {
@@ -130,7 +132,7 @@ export default function Home() {
   return (
     <>
       {/* Interactive Web UI (hidden on print) */}
-      <div className={`h-screen flex flex-col justify-between text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/40 relative overflow-hidden ${theme === "dark" ? "bg-slate-950 dark" : "bg-slate-100/60"} transition-colors no-print`}>
+      <div className={`h-[100dvh] flex flex-col justify-between text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/40 relative overflow-hidden ${theme === "dark" ? "bg-slate-950 dark" : "bg-slate-100/60"} transition-colors no-print`}>
         {/* Background Ambience Pattern */}
         <div className="fixed inset-0 bg-dot-pattern pointer-events-none -z-10" />
 
@@ -146,19 +148,55 @@ export default function Home() {
         />
 
         {/* Main Split Studio Container */}
-        <main className="max-w-[1600px] w-full mx-auto px-3 sm:px-5 lg:px-6 py-3 flex-1 min-h-0 flex flex-col overflow-hidden">
+        <main className="max-w-[1600px] w-full mx-auto px-2.5 sm:px-5 lg:px-6 py-2 sm:py-3 flex-1 min-h-0 flex flex-col overflow-hidden">
           {/* Error Alert */}
           {errorMessage && (
-            <div className="mb-3 p-3 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 rounded-xl flex items-center gap-2.5 text-xs text-rose-800 dark:text-rose-300 animate-in fade-in duration-150 shrink-0">
+            <div className="mb-2 sm:mb-3 p-2.5 sm:p-3 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900/60 rounded-xl flex items-center gap-2.5 text-xs text-rose-800 dark:text-rose-300 animate-in fade-in duration-150 shrink-0">
               <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
               <p>{errorMessage}</p>
             </div>
           )}
 
-          {/* Studio Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 items-stretch overflow-hidden">
+          {/* Mobile Segmented View Control (Visible only on screens < lg) */}
+          <div className="lg:hidden shrink-0 mb-2 sm:mb-2.5">
+            <div className="grid grid-cols-2 p-1 bg-slate-200/80 dark:bg-slate-800/90 rounded-xl text-xs font-semibold">
+              <button
+                onClick={() => setMobileTab("editor")}
+                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  mobileTab === "editor"
+                    ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <Wand2 className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Notes & Inputs</span>
+              </button>
+
+              <button
+                onClick={() => setMobileTab("preview")}
+                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  mobileTab === "preview"
+                    ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-bold"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Resume Preview</span>
+                {resumeResult?.ats_analysis && (
+                  <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 font-mono">
+                    {resumeResult.ats_analysis.score}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Studio Grid: Tab-switched on mobile, Split 50/50 on lg+ */}
+          <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-12 lg:gap-4 overflow-hidden">
             {/* Left Column: Raw Input Editor */}
-            <div className="lg:col-span-6 h-full min-h-0 flex flex-col overflow-hidden">
+            <div className={`h-full min-h-0 flex flex-col overflow-hidden lg:col-span-6 ${
+              mobileTab === "editor" ? "flex" : "hidden lg:flex"
+            }`}>
               <RawInputEditor
                 rawText={rawText}
                 setRawText={setRawText}
@@ -172,47 +210,49 @@ export default function Home() {
             </div>
 
             {/* Right Column: Unified Preview / LaTeX Card */}
-            <div className="lg:col-span-6 h-full min-h-0 flex flex-col overflow-hidden">
+            <div className={`h-full min-h-0 flex flex-col overflow-hidden lg:col-span-6 ${
+              mobileTab === "preview" ? "flex" : "hidden lg:flex"
+            }`}>
               <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.03)] flex flex-col h-full overflow-hidden transition-colors">
-                {/* Top Header Bar (48px - matching left card) */}
-                <div className="h-12 px-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50 shrink-0">
+                {/* Top Header Bar */}
+                <div className="h-11 sm:h-12 px-2.5 sm:px-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50 shrink-0 gap-1.5">
                   {/* View Tabs */}
-                  <div className="flex items-center gap-1 bg-slate-200/80 dark:bg-slate-800 p-0.5 rounded-lg">
+                  <div className="flex items-center gap-1 bg-slate-200/80 dark:bg-slate-800 p-0.5 rounded-lg shrink-0">
                     <button
                       onClick={() => setActiveTab("preview")}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                         activeTab === "preview"
-                          ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs"
+                          ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs font-bold"
                           : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                       }`}
                     >
-                      <FileText className="w-3.5 h-3.5" />
-                      <span>Document Preview</span>
+                      <FileText className="w-3.5 h-3.5 shrink-0" />
+                      <span><span className="hidden xs:inline">Document </span>Preview</span>
                     </button>
 
                     <button
                       onClick={() => setActiveTab("latex")}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                         activeTab === "latex"
-                          ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs"
+                          ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs font-bold"
                           : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                       }`}
                     >
-                      <Code2 className="w-3.5 h-3.5" />
-                      <span>LaTeX Source (.tex)</span>
+                      <Code2 className="w-3.5 h-3.5 shrink-0" />
+                      <span>LaTeX<span className="hidden xs:inline"> Source</span></span>
                     </button>
                   </div>
 
                   {/* ATS Score & Right Actions */}
                   {resumeResult && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <button
                         onClick={() => setShowAtsModal(true)}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900/80 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all shadow-2xs cursor-pointer active:scale-95"
+                        className="inline-flex items-center gap-1 sm:gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900/80 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg transition-all shadow-2xs cursor-pointer active:scale-95"
                         title="Open comprehensive ATS compatibility report"
                       >
-                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>ATS: {resumeResult.ats_analysis.score}/100</span>
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                        <span>ATS: {resumeResult.ats_analysis.score}</span>
                         <span className="hidden sm:inline text-[10px] text-emerald-700 dark:text-emerald-400 underline font-semibold ml-0.5">
                           Report
                         </span>
@@ -242,7 +282,7 @@ export default function Home() {
         </main>
 
         {/* Clean Formatted Footer without Love Emoji, Linking to GitHub */}
-        <footer className="h-9 border-t border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 shrink-0 transition-colors">
+        <footer className="h-9 sm:h-10 border-t border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-3 sm:px-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 shrink-0 transition-colors pb-safe">
           <div className="flex items-center gap-1.5">
             <span>Built by</span>
             <a

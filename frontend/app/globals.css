@@ -87,6 +87,16 @@ html:not(.dark) [class*="dark:border-slate-700"] {
   scrollbar-width: none;
 }
 
+/* Mobile smooth momentum scrolling */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area padding for mobile browser home indicators */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /* Custom subtle vertical scrollbar */
 ::-webkit-scrollbar {
   width: 5px;

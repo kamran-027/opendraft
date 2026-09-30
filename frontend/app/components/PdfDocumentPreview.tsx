@@ -270,19 +270,19 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
 
   // --- SCREEN PREVIEW MODE ---
   return (
-    <div className="h-full overflow-y-auto bg-slate-200/80 dark:bg-slate-950/80 p-3 sm:p-5 flex justify-center items-start selection:bg-indigo-100 transition-colors">
+    <div className="h-full overflow-y-auto touch-scroll bg-slate-200/80 dark:bg-slate-950/80 p-2 sm:p-4 md:p-5 flex justify-center items-start selection:bg-indigo-100 transition-colors">
       {/* The 1-Page Letter Sheet (Authentic Jake's Resume Spacing & Letter Proportion) */}
       <div
         id="printable-resume"
-        className="bg-white text-slate-900 shadow-2xl rounded-xs w-full max-w-[720px] min-h-[960px] p-7 sm:p-9 font-serif leading-normal selection:bg-indigo-100 shrink-0 my-2 sm:my-4"
+        className="bg-white text-slate-900 shadow-2xl rounded-sm w-full max-w-[720px] min-h-auto sm:min-h-[960px] p-4 sm:p-7 md:p-9 font-serif leading-normal selection:bg-indigo-100 shrink-0 my-1 sm:my-4"
         style={{ fontFamily: '"Times New Roman", Times, Georgia, serif' }}
       >
         {/* Header */}
         <div className="text-center pb-2">
-          <h1 className="text-2xl sm:text-[22pt] font-bold tracking-tight text-slate-950 uppercase mb-1">
+          <h1 className="text-xl sm:text-2xl md:text-[22pt] font-bold tracking-tight text-slate-950 uppercase mb-1">
             {cleanText(contact.full_name)}
           </h1>
-          <div className="text-xs sm:text-[10.5pt] text-slate-800 flex flex-wrap items-center justify-center gap-x-2">
+          <div className="text-[11px] sm:text-xs md:text-[10.5pt] text-slate-800 flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
             {contactNodes.map((node, i) => (
               <React.Fragment key={i}>
                 {i > 0 && <span className="select-none text-slate-400">|</span>}
@@ -294,23 +294,23 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
 
         {/* Education */}
         {education && education.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-2.5 sm:mt-3">
             <h2 className="text-xs sm:text-[11pt] font-bold uppercase tracking-widest border-b border-black pb-0.5 mb-1.5 text-slate-950">
               Education
             </h2>
             <div className="space-y-1.5">
               {education.map((edu, idx) => (
                 <div key={idx} className="text-xs sm:text-[10.5pt]">
-                  <div className="flex justify-between font-bold text-slate-950">
-                    <span>{cleanText(edu.institution)}</span>
-                    <span>{cleanText(edu.location)}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 font-bold text-slate-950">
+                    <span className="break-words">{cleanText(edu.institution)}</span>
+                    <span className="text-[10.5px] sm:text-[10.5pt] font-normal sm:font-bold text-slate-600 sm:text-slate-950 shrink-0">{cleanText(edu.location)}</span>
                   </div>
-                  <div className="flex justify-between italic text-slate-800 text-[10.5px] sm:text-[10pt]">
-                    <span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 italic text-slate-800 text-[10.5px] sm:text-[10pt]">
+                    <span className="break-words">
                       {cleanText(edu.degree)}
                       {edu.gpa_or_honors ? ` — ${cleanText(edu.gpa_or_honors)}` : ""}
                     </span>
-                    <span>{cleanText(edu.graduation_date)}</span>
+                    <span className="shrink-0 not-italic sm:italic text-[10px] sm:text-[10pt] text-slate-500 sm:text-slate-800">{cleanText(edu.graduation_date)}</span>
                   </div>
                 </div>
               ))}
@@ -320,24 +320,24 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
 
         {/* Experience */}
         {experience && experience.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-2.5 sm:mt-3">
             <h2 className="text-xs sm:text-[11pt] font-bold uppercase tracking-widest border-b border-black pb-0.5 mb-1.5 text-slate-950">
               Experience
             </h2>
             <div className="space-y-2">
               {experience.map((exp, idx) => (
                 <div key={idx} className="text-xs sm:text-[10.5pt]">
-                  <div className="flex justify-between font-bold text-slate-950">
-                    <span>{cleanText(exp.role)}</span>
-                    <span>{cleanText(exp.date_range)}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 font-bold text-slate-950">
+                    <span className="break-words">{cleanText(exp.role)}</span>
+                    <span className="text-[10.5px] sm:text-[10.5pt] font-medium sm:font-bold text-slate-600 sm:text-slate-950 shrink-0">{cleanText(exp.date_range)}</span>
                   </div>
-                  <div className="flex justify-between italic text-slate-800 text-[10.5px] sm:text-[10pt] mb-0.5">
-                    <span>{cleanText(exp.company)}</span>
-                    <span>{cleanText(exp.location)}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 italic text-slate-800 text-[10.5px] sm:text-[10pt] mb-0.5">
+                    <span className="break-words">{cleanText(exp.company)}</span>
+                    <span className="shrink-0 not-italic sm:italic text-[10px] sm:text-[10pt] text-slate-500 sm:text-slate-800">{cleanText(exp.location)}</span>
                   </div>
                   <ul className="list-disc list-outside pl-4 space-y-0.5 text-[10.5px] sm:text-[10pt] text-slate-900 leading-[1.35]">
                     {exp.bullets.map((b, bIdx) => (
-                      <li key={bIdx}>{cleanText(b)}</li>
+                      <li key={bIdx} className="break-words">{cleanText(b)}</li>
                     ))}
                   </ul>
                 </div>
@@ -348,15 +348,15 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
 
         {/* Projects */}
         {projects && projects.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-2.5 sm:mt-3">
             <h2 className="text-xs sm:text-[11pt] font-bold uppercase tracking-widest border-b border-black pb-0.5 mb-1.5 text-slate-950">
               Projects & Initiatives
             </h2>
             <div className="space-y-2">
               {projects.map((proj, idx) => (
                 <div key={idx} className="text-xs sm:text-[10.5pt]">
-                  <div className="flex justify-between font-bold text-slate-950">
-                    <span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5 sm:gap-2 font-bold text-slate-950">
+                    <span className="break-words">
                       {cleanText(proj.name)}
                       {proj.technologies && (
                         <span className="font-normal italic text-[10.5px] sm:text-[10pt] text-slate-700">
@@ -364,11 +364,11 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
                         </span>
                       )}
                     </span>
-                    <span className="text-[10.5px] sm:text-[10pt] font-normal">{cleanText(proj.date_or_link)}</span>
+                    <span className="text-[10px] sm:text-[10pt] font-normal text-slate-500 sm:text-slate-950 shrink-0">{cleanText(proj.date_or_link)}</span>
                   </div>
                   <ul className="list-disc list-outside pl-4 space-y-0.5 text-[10.5px] sm:text-[10pt] text-slate-900 leading-[1.35] mt-0.5">
                     {proj.bullets.map((b, bIdx) => (
-                      <li key={bIdx}>{cleanText(b)}</li>
+                      <li key={bIdx} className="break-words">{cleanText(b)}</li>
                     ))}
                   </ul>
                 </div>
@@ -379,13 +379,13 @@ export const PdfDocumentPreview: React.FC<PdfDocumentPreviewProps> = ({ data, is
 
         {/* Skills */}
         {skills && skills.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-2.5 sm:mt-3">
             <h2 className="text-xs sm:text-[11pt] font-bold uppercase tracking-widest border-b border-black pb-0.5 mb-1.5 text-slate-950">
               Technical & Leadership Skills
             </h2>
             <div className="space-y-0.5 text-[10.5px] sm:text-[10pt] text-slate-900 leading-[1.35]">
               {skills.map((s, idx) => (
-                <div key={idx}>
+                <div key={idx} className="break-words">
                   <span className="font-bold text-slate-950">{cleanText(s.category_name)}: </span>
                   <span>{cleanText(s.skills_list)}</span>
                 </div>
